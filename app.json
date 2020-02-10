@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/carAdevise/index",    
+    "pages/carpic/index",             
+    "pages/picShow/index",       
+    "pages/carharm/index",           
+    "pages/carInfo/index",                                                                              
+    "pages/logs/logs"    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0097FF",
+    "navigationBarTitleText": "智能估损",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

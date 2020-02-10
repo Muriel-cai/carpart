@@ -1,0 +1,93 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="swiperBox ">
+  <swiper
+    indicator-dots="{{indicatorDots}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    current="{{currentTab}}" 
+    style='height:{{height}}'
+    bindchange="swiperTab"
+    previous-margin="30rpx"
+    next-margin="30rpx"
+  >
+    <block wx:for="{{listData}}">
+      <swiper-item class= "swiper-item">
+      <view class="mainBox" >
+        <view class="conbox">
+          <image  class="picBix slide-image" src="{{item.imageUrl}}"
+          style=" display:block;" />
+        </view>
+        <view class="table">
+          <view class="tr1">
+            <view class="th w50">损伤部位</view>
+            <view class="th w50">损伤类型</view>
+          </view>
+          <block wx:for="{{item.list}}" wx:for-item="list">
+            <view class="tr1" >
+              <view class="td w50 ">{{list.partName}}</view>
+              <view class="td w50">{{list.injuredType}}</view>
+          
+            </view>
+          </block>  
+        </view>
+        </view> 
+      </swiper-item>
+    </block>
+  </swiper>
+  </view>
+  <!-- <view class="box">
+    <view class="mainBox" wx:for="{{listData}}">
+      <view class="picBix">
+        <image class="picBix" src="{{item.imageUrl}}"></image>
+      </view>
+      <view class="table">
+        <view class="tr bg-w">
+        <view class="th w50">损伤部位</view>
+        <view class="th w50">损伤类型</view>
+      </view>
+      <block wx:for="{{item.list}}" wx:for-item="list" wx:key="{{code}}">
+        <view class="tr" >
+          <view class="td w50 ">{{list.partName}}</view>
+          <view class="td w50">{{list.injuredType}}</view>
+        
+        </view>
+      </block>  
+    </view>
+  </view>
+</view> -->
+
+ <view class="box">
+    <view class="table">
+      <view class="tr bg-w">
+        <view class="th ">部位</view>
+        <view class="th">配件费(元)</view>
+        <view class="th ">工时费(元)</view>
+      </view>
+    <block wx:for="{{harmData}}" wx:key="{{code}}">
+      <view class="tr" >
+        <view class="td ">{{item.partName}}</view>
+        <view class="td">{{item.partPrice}}</view>
+        <view class="td">{{item.hourPrice}}</view>
+      </view>   
+    </block>
+    <view class="tr">
+      <view class="td ">小计</view>
+      <view class="td">{{totalAccessoriesCost}}</view>
+      <view class="td">{{totalManhourCost}}</view>
+    </view>
+    <view class="totalNum">
+     合计：{{totalnum}}
+     
+    </view>
+  </view>
+</view>
+ <view class="usermotto"  bind:tap="getSure">
+    <text class="sureBtn">查看出险建议</text>
+  </view>
+  <van-toast id="van-toast"/>
+</view>
+
+
+
+

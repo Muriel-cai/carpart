@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-search": "../../dist/search/index",
+    "van-field": "../../dist/field/index",
+    "van-cell": "../../dist/cell/index",
+    "van-popup": "../../dist/popup/index",
+    "van-cell-group": "../../dist/cell-group/index",
+    "van-toast": "../../dist/toast/index"
+    
+  }
+}

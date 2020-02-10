@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+  <image class='img_shili' src='../../img/img_shili.png' mode='widthFix'></image>
+</view>
+
+
+
+

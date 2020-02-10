@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="container">
+<!-- <view class="topTitle">损失智能估算 </view> -->
+  <view class="mainBox">
+    <view class="table">
+      <view class="tr bg-w">
+        <view class="th w50">部位</view>
+        <view class="th">配件费(元)</view>
+        <view class="th ">工时费(元)</view>
+      </view>
+    <block wx:for="{{listData}}" wx:key="{{code}}">
+      <view class="tr" >
+        <view class="td w50">{{item.partName}}</view>
+        <view class="td">{{item.partPrice}}</view>
+        <view class="td">{{item.hourPrice}}</view>
+      </view>   
+    </block>
+    <view class="tr">
+      <view class="td w50">小计</view>
+      <view class="td">{{totalAccessoriesCost}}</view>
+      <view class="td">{{totalManhourCost}}</view>
+    </view>
+    <view class="totalNum">
+     合计：{{totalnum}}
+     
+    </view>
+  </view>
+</view>
+ <view class="usermotto" bind:tap="getSure">
+     <text class="sureBtn" >查看出险建议</text>
+   </view>
+    <van-toast id="van-toast"/>
+</view>

@@ -1,0 +1,58 @@
+/**index.wxss**/
+.top_image{
+  position: absolute;
+  z-index: 1;
+  top:0;
+  left:0;
+  right:0;
+  width: 100%;
+}
+/* .loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+} */
+.mainBox{
+  position:relative;
+  z-index: 3;
+  width: 710rpx;
+  height: auto;
+  margin: 0 auto;
+  /* box-shadow:0px 3px 6px rgba(0,0,0,0.1); */
+  border-radius:10px;
+  margin-top: 90rpx;
+}
+.carImg{
+  position: relative;
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: #fff;
+}
+.title{
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  color: #333;
+  font-size: 36rpx;
+}
+.sureBtn{
+  position: fixed;
+  z-index:10;
+  bottom: 20rpx;
+  left:50rpx;
+  clear: both;
+  width:650rpx;
+  height:98rpx;
+  background:rgba(0,151,255,1);
+  opacity:1;
+  border-radius:50rpx;
+  text-align: center;
+  line-height: 98rpx;
+  color: #fff;
+  font-size: 18px;
+}
+

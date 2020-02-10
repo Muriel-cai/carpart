@@ -1,0 +1,91 @@
+/**index.wxss**/
+.topTitle{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+  color: #666;
+}
+.color_blue{
+  color:rgba(0,151,255,1);
+  padding-left: 10rpx;
+}
+.top_image{
+  position: absolute;
+  z-index: 1;
+  top:0;
+  left:0;
+  right:0;
+  width: 100%;
+}
+
+.myCanvas {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+/* .loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+} */
+.carPicBox{
+  position:relative;
+  overflow: hidden;
+  z-index: 3;
+  width: 710rpx;
+  height: auto;
+  margin: 0 auto;
+  /* box-shadow:0px 3px 6px rgba(0,0,0,0.1); */
+  margin-top: 1rpx;
+ 
+}
+.carPic{
+  position: relative;
+  width: 320rpx;
+  height: 210rpx;
+  float:left;
+  border:1rpx dotted #ddd;
+  margin:20rpx 15.5rpx;
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.addPhoto{
+  width: 80rpx;
+  height: 80rpx; 
+}
+.addText{
+  position: absolute;
+  width: 100%;
+  height:40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  text-align: center;
+  left:0;right:0;bottom:20rpx;
+  color:#999;
+}
+.carPicLi{
+  width: 320rpx;
+  height: 210rpx;
+  border-radius: 8rpx;
+}
+.sureBtn{
+  position: fixed;
+  z-index:10;
+  bottom: 20rpx;
+  left:50rpx;
+  clear: both;
+  width:650rpx;
+  height:98rpx;
+  background:rgba(0,151,255,1);
+  opacity:1;
+  border-radius:50rpx;
+  text-align: center;
+  line-height: 98rpx;
+  color: #fff;
+  font-size: 18px;
+}
+

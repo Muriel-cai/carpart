@@ -1,0 +1,94 @@
+/**index.wxss**/
+.topTitle{
+  position: relative;
+  z-index: 1;
+  width: 710rpx;
+  height:100rpx;
+  line-height: 100rpx;
+  font-size: 40rpx;
+  color:#333333;
+  margin: 0 auto; 
+}
+/* .loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+} */
+.mainBox{
+  position:relative;
+  overflow: hidden;
+  z-index: 3;
+  width: 710rpx;
+  height: auto;
+  margin: 0 auto; 
+  padding: 0rpx 0rpx 120rpx ;
+  background: #fff;
+}
+.table {
+  /* border: 0px solid darkgray; */
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 50rpx;
+  padding: 20rpx 0;
+  align-items: left;
+  border-bottom:1rpx solid #F6F6F6;
+}
+.td {
+    width:25%;
+    justify-content: center;
+    text-align: left;
+    font-size:32rpx;
+    line-height: 60rpx;
+    color:#666;
+    padding-left:10rpx; 
+}
+
+.bg-w{
+  background: #f8f8f8;
+}
+.bg-g{
+  background: #E6F3F9;
+}
+.th {
+  width: 25%;
+  justify-content: left;
+  display: flex;  
+  align-items: center;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  color:#999;
+  padding-left: 10rpx;
+}
+.w50{
+  width: 50%;
+}
+.totalNum{
+  position: relative;
+  width: 660rpx;
+  height:100rpx;
+  font-size: 36rpx;
+  text-align: right;
+  padding-right: 50rpx;
+  line-height: 100rpx;
+}
+.sureBtn{
+  position: fixed;
+  z-index:10;
+  bottom: 20rpx;
+  left:50rpx;
+  clear: both;
+  width:650rpx;
+  height:98rpx;
+  background:rgba(0,151,255,1);
+  opacity:1;
+  border-radius:50rpx;
+  text-align: center;
+  line-height: 98rpx;
+  color: #fff;
+  font-size: 18px;
+}
+

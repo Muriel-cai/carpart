@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <image class='top_image' src='../../img/imgBg01.png' mode='widthFix'></image>
+  <view class="mainBox">
+    <image class='carImg' src='{{carPic}}' mode='widthFix'></image>
+    <view class="title">{{pp}} </view>
+    <van-cell-group>
+      <van-cell title="车系"  value="{{ carBrand }}"  />
+      <van-cell title="生产年份"  value="{{ carYear }}" />
+      <van-cell title="公告号" value="{{ carGgh }}"  />
+      <van-cell title="销售版本"  value="{{ carType }}"  />
+      <van-cell title="变速箱"  value="{{ gearbox }}" />
+      <!-- <van-cell title="车体结构" value="{{ carStructure }}"  /> -->
+    </van-cell-group>
+  </view>
+ <view class="usermotto" bind:tap="getSure">
+       <text class="sureBtn" >确认车型</text>
+     </view>
+  <van-toast id="van-toast"/>
+</view>

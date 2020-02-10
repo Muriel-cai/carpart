@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+  <view class="topTitle">
+  请拍摄车辆受损部位照片
+  <text class="color_blue" bindtap='toExample'>查看拍照示例</text>
+  </view>
+    
+    <view class='carPicBox' >
+      <view  class="carPic " wx:for='{{photos}}'>
+        <image mode="widthFix"
+         class="carPicLi"
+          src="{{item}}"
+          data-src="{{item}}"
+          data-index="{{index}}"
+          bindtap='photoClick'
+        ></image>
+      </view>
+      <view class=" carPic"  bindtap='addPhoto'>
+        <image mode="widthFix"  
+          class="addPhoto"      
+          src="{{addPhoto}}"
+         
+        ></image>  
+        <text class="addText">添加照片</text>
+      </view>
+       
+    </view>
+  
+  </view>
+  <view class="usermotto"  bind:tap="getSure">
+    <text class="sureBtn">受损部位识别</text>
+  </view>
+  <view>
+    <image></image>
+  </view>
+  <canvas 
+    canvas-id='attendCanvasId' 
+    class='myCanvas' 
+    :style="'width:' + imageSize.imageWidth + 'rpx; height:' + imageSize.imageHeight  + 'rpx;'"
+    >
+  </canvas>
+<!--  
+<img :src="userAvatar" alt @click="takePhoto"> -->
+</view>
