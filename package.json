@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "miniprogram-computed": "^2.1.1",
     "miniprogram-sm-crypto": "^0.1.0",
-    "vant-weapp": "^0.5.23"
+    "vant-weapp": "^0.5.28"
   }
 }

@@ -20,10 +20,10 @@ Page({
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '损失智能估算' });
-    console.log(options, "[[[[[[[[[[[[[[", app.globalData)
     self.setData({
-      caseId: app.globalData.caseId,
-      modelId: app.globalData.modelId
+      caseId: options.caseId,
+      modelId:options.modelId
+
     });
     //  self.data.caseId = 47;
     // self.data.modelId = 71416;
@@ -34,19 +34,18 @@ Page({
         Toast.clear();
 
       } else {
-        console.log(self.data.value)
         Toast.loading({
           mask: false,
-          message: '正在解析中，请稍等！'
+          message: '正在解析中，请稍等！',
+          forbidClick:true
         });
       }
     }, 200);
     let data = {
-      caseId: self.data.caseId,
-      modelId: self.data.modelId
+      caseId: options.caseId,
+     
     };
-    WXAPI.request('POST', '/ai/recogn/getInjuredCase', data, (res) => {
-      console.log(res,"]]]]]");
+    WXAPI.request('POST', '/recogn/finished', data, (res) => {
       self.setData({
         hasDone: true
       });
@@ -56,25 +55,20 @@ Page({
           // harmData.push(listData[i].list);
           for
           (let j = 0; j < listData[i].list.length; j++){
-            console.log(listData[i].list[j].partPrice,"[[[[[");
             harmData.push(listData[i].list[j]);
             if (listData[i].list[j].partPrice == '' || listData[i].list[j].partPrice ==  null  ){
-              // console.log('1111partPrice', listData[i].list[j].partPrice)
               listData[i].list[j].partPrice = 0;
             }else {               
               totalCost = totalCost + Number(listData[i].list[j].partPrice);
             } ;
             if (listData[i].list[j].hourPrice == '' || listData[i].list[j].hourPrice == null){
-              // console.log('1111hourPricee', listData[i].list[j].hourPrice)
              listData[i].list[j].hourPrice = 0;
             } else {
               totalManhour = totalManhour+Number(listData[i].list[j].hourPrice);
-            }  
-            // console.log(harmData, totalCost, totalManhour, totalPrice);           
+            }          
           }
         };
         totalPrice = totalCost + totalManhour;
-        // console.log(harmData, totalCost, totalManhour, totalPrice);
 
         self.setData({
           listData: harmData,
@@ -182,9 +176,9 @@ Page({
   },
   //确认车型
   getSure: function() {
-    let self = this;
+    let self = this;   
     wx.navigateTo({
-      url: '../carAdevise/index?totalPrice=' + self.data.totalnum,
+      url: '../feeList/feeList'
 
     });
   },

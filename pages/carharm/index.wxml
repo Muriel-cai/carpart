@@ -11,7 +11,7 @@
     previous-margin="30rpx"
     next-margin="30rpx"
   >
-    <block wx:for="{{listData}}">
+    <block wx:for="{{listData}}"  wx:for-index='index' >
       <swiper-item class= "swiper-item">
       <view class="mainBox" >
         <view class="conbox">
@@ -21,72 +21,111 @@
         <view class="table">
           <view class="tr1">
             <view class="th w50">损伤部位</view>
-            <view class="th w50">损伤类型</view>
+            <view class="th w50"> 
+              损伤类型 
+              <view class="editBtn" wx:if="{{caseType == 0}}"  bind:tap="getDamage"  data-index="{{index}}">
+                <image class="addBtn edIcon" src="../../img/icon_add.png" mode="cover"></image>
+              </view>          
+            </view>
           </view>
-          <block wx:for="{{item.list}}" wx:for-item="list">
+          <block wx:for="{{item.list}}" wx:for-item="list"  wx:for-index='ind' >
             <view class="tr1" >
               <view class="td w50 ">{{list.partName}}</view>
-              <view class="td w50">{{list.injuredType}}</view>
-          
+              <view class="td w50">
+                {{list.injuredType}}
+                <view class="editBtn" wx:if="{{caseType == 0}}" bindtap="delDamage" data-id="{{list.partId}}" data-ind="{{ind}}" data-index ="{{index}}">               
+                  <image class="edIcon changeBtn" src="../../img/icon_jian.png" mode="cover"></image>
+                </view>
+              </view>
+             
             </view>
           </block>  
+
         </view>
         </view> 
       </swiper-item>
     </block>
   </swiper>
-  </view>
-  <!-- <view class="box">
-    <view class="mainBox" wx:for="{{listData}}">
-      <view class="picBix">
-        <image class="picBix" src="{{item.imageUrl}}"></image>
-      </view>
-      <view class="table">
-        <view class="tr bg-w">
-        <view class="th w50">损伤部位</view>
-        <view class="th w50">损伤类型</view>
-      </view>
-      <block wx:for="{{item.list}}" wx:for-item="list" wx:key="{{code}}">
-        <view class="tr" >
-          <view class="td w50 ">{{list.partName}}</view>
-          <view class="td w50">{{list.injuredType}}</view>
-        
-        </view>
-      </block>  
-    </view>
-  </view>
-</view> -->
-
- <view class="box">
+  </view> 
+  <view class="box">
     <view class="table">
       <view class="tr bg-w">
         <view class="th ">部位</view>
-        <view class="th">配件费(元)</view>
-        <view class="th ">工时费(元)</view>
+        <view class="th">维修类型</view>
+        <view class="th ">费用(元)</view>
       </view>
-    <block wx:for="{{harmData}}" wx:key="{{code}}">
+    <block wx:for="{{harmData}}" wx:key="{{code}}" wx:for-index='index'>
       <view class="tr" >
         <view class="td ">{{item.partName}}</view>
-        <view class="td">{{item.partPrice}}</view>
-        <view class="td">{{item.hourPrice}}</view>
+        <view class="td">{{item.repairType}}</view>
+        <view class="td">
+          {{item.price}}
+          <view class="editBtn" wx:if="{{caseType == 0}}" bindtap="changePrice" data-index="{{index}}" data-partId="{{item.partId}}">
+            <image class="addBtn edIcon" src="../../img/icon_bianji.png" mode="cover"></image>
+          </view>    
+        </view>
       </view>   
     </block>
-    <view class="tr">
-      <view class="td ">小计</view>
-      <view class="td">{{totalAccessoriesCost}}</view>
-      <view class="td">{{totalManhourCost}}</view>
-    </view>
     <view class="totalNum">
-     合计：{{totalnum}}
-     
+     合计：{{totalPrice}}    
     </view>
   </view>
 </view>
- <view class="usermotto"  bind:tap="getSure">
-    <text class="sureBtn">查看出险建议</text>
+  <view class="usermotto"  bind:tap="getSure">
+    <text wx:if="{{caseType == 0}}" class="sureBtn">完成</text>
+    <text wx:else="{{caseType == 0}}" class="sureBtn">返回</text>
   </view>
   <van-toast id="van-toast"/>
 </view>
+<modal 
+    title="修改价格" 
+    hidden="{{modalHidden}}" 
+    confirm-text="确定" 
+    cancel-text="取消" 
+    confirmColor="#1890FF"
+    mask='true'
+    bindconfirm="modalBindaconfirm" 
+    bindcancel="modalBindcancel">
+     <input class="priceInput" auto-focus placeholder="请输入价格"   value="{{ newPrice }}" bind:change="getNewPrice"  />
+</modal>
+
+<van-popup
+    show="{{ show }}"      
+    bind:close="onClose"
+    position="bottom"
+    custom-style=" height:60%"    
+  >
+    <!--选择框-->
+    <view class="blockB">
+      <van-search value="{{ keyValue }}" input-align="center" bind:change="getValue"   placeholder="请输入搜索关键词 " />
+      <van-picker 
+        columns="{{ columns }}" 
+        bind:change="onChange" 
+        bind:cancel="onClose"
+        bind:confirm="getNameSure"
+        show-toolbar= "true"
+        defaultIndex="0"
+      />
+    </view>
+    <!--修改价格框-->
+      <!-- <view class="box500" wx:if="{{isPrice == true}}"> 
+        <view class="smTitle">修改价格</view>    
+        <van-cell-group>       
+          <van-field
+           
+            placeholder=""
+            border="{{ false }}"
+            bind:change="onChange"
+            input-class="PriceInput"
+          />
+        </van-cell-group>
+        <view class="btnbox" >      
+          <van-button size="small" type="default" custom-class="btnMar">取消</van-button>                 
+          <van-button size="small" type="info" bind:tap="getSure" custom-class="btnMar">确认</van-button>       
+        </view>    
+  </view> -->
+</van-popup>
+
 
 
 

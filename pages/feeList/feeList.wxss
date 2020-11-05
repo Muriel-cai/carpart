@@ -1,0 +1,74 @@
+/* pages/feeList/feeList.wxss */
+.listBox {
+    position: relative;
+    color: #333;
+    width: 660rpx;
+    font-size: 28rpx;
+    margin-top: 20rpx;
+    padding: 20rpx 20rpx 40rpx;
+    border-radius: 20rpx;
+
+}
+
+.modeBox {
+    position: relative;
+    width: 615rpx;
+    height: 78rpx;
+    padding-left: 50rpx;
+    line-height: 78rpx;
+    margin-bottom: 15rpx;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.8);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.carcamimg {
+    position: absolute;
+    width: 40rpx;
+    height: 32rpx;
+    left: 0;
+    bottom: 23rpx;
+}
+
+.textH1 {
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+
+.statusT {
+    font-size: 28rpx;
+    font-weight: normal;
+    float: right;
+}
+
+.textP {
+    line-height: 50rpx;
+    font-size: 28rpx;
+}
+
+.addCase {
+    position: fixed;
+    z-index: 99;
+    bottom: 50rpx;
+    right: 50rpx;
+    border-radius: 50%;
+    width: 120rpx;
+    height: 120rpx;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.addIcon {
+    border-radius: 50%;
+    width: 120rpx;
+    height: 120rpx;
+}
+.nodBox{
+    text-align: center;
+    padding-top:200rpx;
+}
+.noDIcon{
+    width: 340rpx;
+    height: 345rpx;
+}

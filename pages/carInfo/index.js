@@ -19,21 +19,22 @@ Page({
     carType:'',
     gearbox:'',
     carStructure:'',
-    hasDone: false
+    hasDone: false,
+    caseId:''
     
   },
   onLoad: function (options) {
     let self = this;
     wx.setNavigationBarTitle({ title: '车辆信息' });
-    console.log(options, "======", app.globalData)
     self.setData({
       pp: options.pp,
       carBrand: options.carBrand,
       carYear: options.carYear,
       carGgh: options.carGgh,
       carType: options.carType,
-      gearbox: options.gearbox
-    
+      gearbox: options.gearbox,
+      caseId:options.caseId,
+      modelId:options.modelId
     });
     wx.showShareMenu({
       withShareTicket: true
@@ -45,8 +46,8 @@ Page({
   //确认车型
   getSure: function() {
     let self = this;
-    wx.navigateTo({
-      url: '../carpic/index',
+    wx.redirectTo({
+      url: '../carpic/index?caseId='+this.data.caseId+'&modelId='+this.data.modelId,
     });
   }
 })

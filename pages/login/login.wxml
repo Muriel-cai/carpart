@@ -1,0 +1,20 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+	<view class="loginBg">
+		<image class="loginImg" src='../../img/login_bg.png'></image>
+	</view>
+	<view class="loginB">
+		<van-cell-group>
+			<van-field value="{{username}}"  label="账号" placeholder="请输入用户名"  bind:blur="onChange1" bind:change="onChange"  />
+		</van-cell-group>
+		<view class="pd1"></view>
+		<van-cell-group>
+			<van-field value="{{ password }}" type="password" label="密码" placeholder="请输入密码" border="{{ false }}" bind:change="onChangePw" border="{{true}}" />
+		</van-cell-group>
+
+	</view>
+	<view class="loginB">
+		<van-button type="info" block bindtap="login">登录</van-button>
+	</view>
+
+</view>

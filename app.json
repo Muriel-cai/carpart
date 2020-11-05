@@ -1,18 +1,20 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/carAdevise/index",    
-    "pages/carpic/index",             
-    "pages/picShow/index",       
-    "pages/carharm/index",           
-    "pages/carInfo/index",                                                                              
-    "pages/logs/logs"    
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#0097FF",
-    "navigationBarTitleText": "智能估损",
-    "navigationBarTextStyle": "white"
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/feeList/feeList",
+        "pages/login/login",   
+        "pages/index/index",        
+        "pages/carharm/index",        
+        "pages/carInfo/index",                                                                                                                    
+        "pages/carpic/index",                                
+        "pages/picShow/index",               
+        "pages/logs/logs",       
+        "pages/carlist/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#0097FF",
+        "navigationBarTitleText": "智能估损",
+        "navigationBarTextStyle": "white"
+    },
+    "sitemapLocation": "sitemap.json"
 }

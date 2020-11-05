@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": " 车辆损失拍照上传",
   "usingComponents": {
     "van-search": "../../dist/search/index",
     "van-field": "../../dist/field/index"

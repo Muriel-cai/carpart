@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "定损单",
+  "enablePullDownRefresh":true,
+  "enableReachBottom": true,
+  "usingComponents": {
+    "van-search": "../../dist/search/index"
+   
+  }
+}

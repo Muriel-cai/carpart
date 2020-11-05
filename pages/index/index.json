@@ -1,8 +1,11 @@
 {
+  "navigationBarTitleText": "自助定损",
   "usingComponents": {
     "van-search": "../../dist/search/index",
     "van-toast": "../../dist/toast/index",
-    "van-dialog": "../../dist/dialog/index"
+    "van-dialog": "../../dist/dialog/index",
+    "van-icon": "../../dist/icon/index",
+    "van-uploader": "../../dist/uploader/index"
 
   }
 }

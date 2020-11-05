@@ -27,7 +27,7 @@
   </view>
 </view>
  <view class="usermotto" bind:tap="getSure">
-     <text class="sureBtn" >查看出险建议</text>
+     <text class="sureBtn" >返回首页</text>
    </view>
     <van-toast id="van-toast"/>
 </view>

@@ -13,8 +13,8 @@
       <!-- <van-cell title="车体结构" value="{{ carStructure }}"  /> -->
     </van-cell-group>
   </view>
- <view class="usermotto" bind:tap="getSure">
-       <text class="sureBtn" >确认车型</text>
-     </view>
+  <view class="usermotto" bind:tap="getSure">
+     <text class="sureBtn" >确认车型</text>
+   </view>
   <van-toast id="van-toast"/>
 </view>

@@ -1,0 +1,34 @@
+<!--pages/feeList/feeList.wxml-->
+<view class="container bgF9">
+	<!-- <view class="blockB bgF pad10" >
+		<view class="box690">
+			<van-search value="{{ searchValue }}" input-align="center" shape="round" placeholder="请输入搜索关键词" />
+		</view>
+
+	</view> -->
+	<view wx:for="{{listData}}" wx:if="{{isnull == true}}" class="blockB listBox bgF" bindtap="getInfo"  data-status="{{item.status}}" data-caseId = "{{item.caseId}}">
+		<view class="modeBox">
+			<image class='carcamimg' src='../../img/icon_car.png' mode='widthFix'></image>
+			{{item.vehicleModel}}
+		</view>
+		<view class="textH1"> {{item.plateNum}}
+			<text  wx:if="{{item.status == 1}}" class="colorG statusT">已完成</text>
+			<text  wx:if="{{item.status == 0}}" class="colorR statusT">未完成</text>
+		</view>
+		<view class="textP">
+			VIN码：{{item.vin}}
+		</view>
+		<view class="textP">
+			定损合计：￥{{item.lossSumPrice > 0  ? item.lossSumPrice  : '--' }}
+		</view>
+		<view class="textP">
+			创建时间：{{item.createDate}}
+		</view>
+	</view>
+	<view class="addCase" bindtap="addCase">
+		<image class="addIcon" src="../../img/tab_xfadd.png" mode="cover"></image>
+	</view>
+	<view wx:if="{{isnull == false}}" class="nodBox blockB bgF">
+		<image class="noDIcon" src="../../img/img_ordernull.png" mode="cover"></image>
+	</view>
+</view>

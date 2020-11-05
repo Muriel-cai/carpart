@@ -4,39 +4,58 @@ import Toast from '../../dist/toast/toast'
 import imgCount from '../../utils/imgCount'
 //获取应用实例
 const app = getApp()
-var imgData= [];
 Page({
-  data: {    
-    carPic:'../../img/carPic.png',
+  data: {
+    carPic: '../../img/carPic.png',
     addPhoto: '../../img/iconCarcam.png',
-    carCode:'',
-    modelId:'',
-    vin:'',
-    caseId:'',
+    carCode: '',
+    modelId: '',
+    vin: '',
+    caseId: '',
     imageSize: '',
-    quality:1,
-    photos:[
-   
-    ] ,
-    allImg:[],  
+    quality: 1,
+    photos: []
   },
   //确认车型
   onLoad: function (options) {
-    let self= this;
-    wx.setNavigationBarTitle({ title: '车损拍照' });
-    console.log(options, "++++", app.globalData)
-    self.setData({
-      carCode: app.globalData.carCode,
-      modelId: app.globalData.modelId,
-      vin:options.vin,
-      // caseId:'47'
-      caseId: app.globalData.caseId
+    let self = this;
+    wx.setNavigationBarTitle({
+      title: '车损拍照'
     });
-
+    self.setData({
+      vin: options.vin,
+      caseId: options.caseId,
+      modelId: options.modelId
+    });
+    this.getPicList()
   },
-  addPhoto: function(e) {     
-    let self = this; 
-    console.log('addPhoto')         
+  // 获取照片列表
+  getPicList: function () {
+    let data = {
+      caseId: this.data.caseId
+    }
+    WXAPI.request('POST', '/injuredCase/getImagesByCaseId', data, (res) => {
+      if (res.status == 200) {
+        this.setData({
+          photos: res.data.imageUrlList,
+          modelId: res.data.modelId
+        });
+      } else {
+        wx.showToast({
+          title: '提示',
+          content: '解析失败',
+          showCancel: false,
+          forbidClick:true
+        })
+      }
+    }, (err) => {
+      console.log(err)
+    }, () => {
+      // console.log('next')
+    })
+  },
+  addPhoto: function (e) {
+    let self = this;
     wx.chooseImage({
       count: 9, // 默认9
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -45,39 +64,48 @@ Page({
         // console.log(res.tempFilePaths,  res.tempFilePaths.length)
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         let tempFilePaths = res.tempFilePaths; // 返回选定照片的本地路径列表         
-        for (let i = 0; i < tempFilePaths.length ; i++){
-          self.uploadimg(tempFilePaths[i]);
-          
-          
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          self.setPic(tempFilePaths[i]);
         }
       }
     })
   },
-  uploadimg:function(path){//这里触发图片上传的方法   
-    var self=this;
-    let param = { caseId: self.data.caseId };
-    // let param = { caseId: '340'}
-    WXAPI.uploadImage('/ai/recogn/uploadImage', path, param, (res) => {
-      console.log(res);
-      var resData = JSON.parse(res.data);
-      imgData.push(resData.imageUrl);
-    }, (err) => {
-      console.log(err);
-      
-      wx.showModal({
-        title: '提示',
-        content: '上传失败00',
-        showCancel: false
-      })
-    }, () => {
-      // console.log('next', imgData);
+  // 转化为 base64
+  setPic: function (file) {
+    let self = this;
+    // const {
+    //   file
+    // } = file;
+    wx.getFileSystemManager().readFile({
+      filePath: file, //选择图片返回的相对路径
+      encoding: 'base64', //编码格式
+      success: res => { //成功的回调
+        self.uploadimg(res.data, file.path);
+      }
+    })
+    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+  },
+  uploadimg: function (path) { //这里触发图片上传的方法   
+    var self = this;
+    let param = {
+      caseId: self.data.caseId,
+      file: path
+    };
+    WXAPI.request('POST', '/recogn/uploadImage', param, (res) => {
       self.setData({
-        allImg: imgData,
-        photos: imgData
+        photos: self.data.photos.concat(res.imageUrl)
       });
       wx.hideToast(); //隐藏Toast
+    }, (err) => {
+      console.log(err);
+      wx.showToast({
+        title: '提示',
+        content: '上传失败00',
+        showCancel: false,
+        forbidClick:true
+      })
     })
- },
+  },
   //压缩并获取图片，这里用了递归的方法来解决canvas的draw方法延时的问题
   getCanvasImg: function (index, failNum, tempFilePaths) {
     var self = this;
@@ -85,38 +113,37 @@ Page({
       // src: tempFilePaths[index],// 用于多个图片压缩
       src: tempFilePaths, //图片的路径，可以是相对路径，临时文件路径，存储文件路径，网络图片路径,  
       success: res => {
-        // console.log(res,"fuuffj")
         // util.imageUtil  用语计算长宽比
         var imageSize = imgCount.imageUtil(res);
         // console.log(imageSize)
         self.imageSize = imageSize;
-
-          const ctx = wx.createCanvasContext('attendCanvasId');
-          setTimeout(() => {         
-            ctx.drawImage(tempFilePaths, 0, 0, imageSize.imageWidth, imageSize.imageHeight);
-            ctx.draw(true, function () {
-              wx.canvasToTempFilePath({
-                canvasId: 'attendCanvasId',
-                fileType: 'jpg',
-                quality: self.data.quality,
-                success: function success(res) {
-                  self.uploadimg(res.tempFilePath);
-                  // self.getCanvasImg(index,failNum,tempFilePaths); // 用于多个图片压缩
-                }, fail: function (e) {
-                  failNum += 1;//失败数量，可以用来提示用户
-                  self.getCanvasImg(inedx, failNum, tempFilePaths);
-                }
-              });
+        const ctx = wx.createCanvasContext('attendCanvasId');
+        setTimeout(() => {
+          ctx.drawImage(tempFilePaths, 0, 0, imageSize.imageWidth, imageSize.imageHeight);
+          ctx.draw(true, function () {
+            wx.canvasToTempFilePath({
+              canvasId: 'attendCanvasId',
+              fileType: 'jpg',
+              quality: self.data.quality,
+              success: function success(res) {
+                self.uploadimg(res.tempFilePath);
+                // self.getCanvasImg(index,failNum,tempFilePaths); // 用于多个图片压缩
+              },
+              fail: function (e) {
+                failNum += 1; //失败数量，可以用来提示用户
+                self.getCanvasImg(inedx, failNum, tempFilePaths);
+              }
             });
-          },200);
-        
+          });
+        }, 200);
+
       },
-      fail: () => { },
-      complete: () => { }
+      fail: () => {},
+      complete: () => {}
     });
   },
- // 删除图片
-  photoClick:function(e){
+  // 删除图片
+  photoClick: function (e) {
     let self = this;
     // console.log();
     var src = e.currentTarget.dataset.src;
@@ -127,7 +154,6 @@ Page({
       showCancel: true,
       success(res) {
         if (res.cancel) {
-          console.log('取消')
           // 用户点击了取消属性的按钮，对应选择了'女'
           // self.setData({
           //   userSex: 2
@@ -137,50 +163,48 @@ Page({
             "caseId": self.data.caseId,
             "imageUrl": src
           }
-          console.log('确认')
-          WXAPI.request('POST', '/ai/recogn/delImage', data, (res) => {
-            console.log(res,"++++++++++");
-            if (res.status == 200){
-              imgData.splice(index, 1);
+          WXAPI.request('POST', '/recogn/delImage', data, (res) => {
+
+            if (res.status == 200) {
+
+              self.data.photos.splice(index, 1)
               self.setData({
-                photos: imgData 
+                photos: self.data.photos
               });
             }
           }, (err) => {
             console.log(err)
           }, () => {
             console.log('next')
-          })        
+          })
         }
       }
     })
-
   },
   //去示例页面
-  toExample:function(){
+  toExample: function () {
     wx.navigateTo({
       url: '../picShow/index',
-
     });
   },
   // 上传图片
-  getSure: function () {   
+  getSure: function () {
     let self = this;
-    // console.log("[[[[[[[[[[[[[[", self.data.photos.length)
-    if(self.data.photos.length >0){
-      wx.navigateTo({
-        url: '../carharm/index',
-
+    if (self.data.photos.length > 0) {
+      wx.redirectTo({
+        url: '../carharm/index?modelId=' + self.data.modelId + '&caseId=' + self.data.caseId + '&type=0',
       });
-    } else{
+    } else {
       wx.showModal({
         title: '提示',
         content: '您好还没上传定损图片，请选您需要定损的照片',
         showCancel: false
-       
       })
     }
-    
+  },
+  onUnload: function () {
+    // wx.redirectTo({
+    //   url: '../feeList/feeList'
+    // })
   }
 })
-

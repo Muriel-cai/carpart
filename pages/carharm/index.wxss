@@ -61,7 +61,12 @@ page{
   padding: 20rpx 0rpx ;
   background: #fff;
 }
-
+.box500{
+  position: relative;
+  width: 460rpx;
+  padding: 30rpx;
+  margin:0 auto;
+}
 .picBix{
   position: relative;
   width: 670rpx;
@@ -94,13 +99,14 @@ page{
   border-bottom:0px solid #F6F6F6;
 }
 .td{
-    width:30%;
-    justify-content: center;
-    text-align: left;
-    font-size:28rpx;
-    line-height: 60rpx;
-    color:#666;
-    padding-left: 3.3%;
+  position: relative;
+  width:30%;
+  justify-content: center;
+  text-align: left;
+  font-size:28rpx;
+  line-height: 50rpx;
+  color:#666;
+  padding-left: 3.3%;
 }
 
 .bg-w{
@@ -110,6 +116,7 @@ page{
   background: #E6F3F9;
 }
 .tr .th {
+  position: relative;
   width: 30%;
   justify-content: left;
   display: flex;  
@@ -119,18 +126,26 @@ page{
   color:#999;
   padding-left: 3.3%;
 }
-.tr1 .th {
+.tr1>.th , 
+.tr1>.td{
+  position: relative;
   width: 48%;
   justify-content: left;
   display: flex;  
   align-items: left;
-  line-height: 70rpx;
+  line-height: 52rpx;
   font-size: 28rpx;
   color:#999;
   padding-left: 2%;
 }
 .w50{
   width: 50%;
+}
+.w30{
+  width: 30%;
+}
+.w20{
+  width: 20%;
 }
 .totalNum{
   position: relative;
@@ -149,7 +164,7 @@ page{
   clear: both;
   width:650rpx;
   height:98rpx;
-  background:rgba(0,151,255,1);
+  background:#0097ff;
   opacity:1;
   border-radius:50rpx;
   text-align: center;
@@ -157,4 +172,38 @@ page{
   color: #fff;
   font-size: 18px;
 }
-
+.editBtn{
+  position: absolute;
+  width:32rpx;
+  height: 32rpx;
+  right: 20rpx;
+  top:50%;
+  margin-top: -18rpx;
+}
+.edIcon{
+  display: block;
+  width: 32rpx;
+  height:32rpx;
+  margin: 0 auto;
+}
+.smTitle{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #666;
+  padding: 20rpx 0;
+}
+.priceInput{
+  background: #f8f8f8;
+  padding: 20rpx 10rpx;
+  margin:10rpx 0;
+  color: #333;
+  text-align: center;
+}
+.btnbox{
+  padding: 20px;
+  height: 60rpx;
+  text-align: right;
+}
+.btnMar{
+  margin-left:30rpx;
+}
